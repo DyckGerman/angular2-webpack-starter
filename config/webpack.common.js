@@ -57,10 +57,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-
-      'polyfills': './src/polyfills.browser.ts',
-      'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
+      'main': './src/main.ts'
 
     },
 
@@ -101,19 +98,7 @@ module.exports = function (options) {
          */
         {
           test: /\.ts$/,
-          use: [
-            '@angularclass/hmr-loader?pretty=' + !isProd + '&prod=' + isProd,
-            'awesome-typescript-loader?{configFileName: "tsconfig.webpack.json"}',
-            'angular2-template-loader',
-            {
-              loader: 'ng-router-loader',
-              options: {
-                loader: 'async-system',
-                genDir: 'compiled',
-                aot: AOT
-              }
-            }
-          ],
+          use: ['awesome-typescript-loader', 'angular2-template-loader'],
           exclude: [/\.(spec|e2e)\.ts$/]
         },
 
@@ -198,20 +183,20 @@ module.exports = function (options) {
        * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
        * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
        */
-      new CommonsChunkPlugin({
-        name: 'polyfills',
-        chunks: ['polyfills']
-      }),
+      // new CommonsChunkPlugin({
+      //   name: 'polyfills',
+      //   chunks: ['polyfills']
+      // }),
       // This enables tree shaking of the vendor modules
-      new CommonsChunkPlugin({
-        name: 'vendor',
-        chunks: ['main'],
-        minChunks: module => /node_modules\//.test(module.resource)
-      }),
+      // new CommonsChunkPlugin({
+      //   name: 'vendor',
+      //   chunks: ['main'],
+      //   minChunks: module => /node_modules\//.test(module.resource)
+      // }),
       // Specify the correct order the scripts will be injected in
-      new CommonsChunkPlugin({
-        name: ['polyfills', 'vendor'].reverse()
-      }),
+      // new CommonsChunkPlugin({
+      //   name: ['polyfills', 'vendor'].reverse()
+      // }),
 
       /**
        * Plugin: ContextReplacementPlugin
@@ -237,10 +222,10 @@ module.exports = function (options) {
        *
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
-      new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
-      ]),
+      // new CopyWebpackPlugin([
+      //   { from: 'src/assets', to: 'assets' },
+      //   { from: 'src/meta'}
+      // ]),
 
 
       /*

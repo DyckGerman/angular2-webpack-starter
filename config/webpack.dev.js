@@ -141,38 +141,38 @@ module.exports = function (options) {
         }
       }),
 
-      new DllBundlesPlugin({
-        bundles: {
-          polyfills: [
-            'core-js',
-            {
-              name: 'zone.js',
-              path: 'zone.js/dist/zone.js'
-            },
-            {
-              name: 'zone.js',
-              path: 'zone.js/dist/long-stack-trace-zone.js'
-            },
-            'ts-helpers',
-          ],
-          vendor: [
-            '@angular/platform-browser',
-            '@angular/platform-browser-dynamic',
-            '@angular/core',
-            '@angular/common',
-            '@angular/forms',
-            '@angular/http',
-            '@angular/router',
-            '@angularclass/hmr',
-            'rxjs',
-          ]
-        },
-        dllDir: helpers.root('dll'),
-        webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
-          devtool: 'cheap-module-source-map',
-          plugins: []
-        })
-      }),
+      // new DllBundlesPlugin({
+      //   bundles: {
+      //     polyfills: [
+      //       'core-js',
+      //       {
+      //         name: 'zone.js',
+      //         path: 'zone.js/dist/zone.js'
+      //       },
+      //       {
+      //         name: 'zone.js',
+      //         path: 'zone.js/dist/long-stack-trace-zone.js'
+      //       },
+      //       'ts-helpers',
+      //     ],
+      //     vendor: [
+      //       '@angular/platform-browser',
+      //       '@angular/platform-browser-dynamic',
+      //       '@angular/core',
+      //       '@angular/common',
+      //       '@angular/forms',
+      //       '@angular/http',
+      //       '@angular/router',
+      //       '@angularclass/hmr',
+      //       'rxjs',
+      //     ]
+      //   },
+      //   dllDir: helpers.root('dll'),
+      //   webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
+      //     devtool: 'cheap-module-source-map',
+      //     plugins: []
+      //   })
+      // }),
 
       /**
        * Plugin: AddAssetHtmlPlugin
@@ -182,10 +182,10 @@ module.exports = function (options) {
        *
        * See: https://github.com/SimenB/add-asset-html-webpack-plugin
        */
-      new AddAssetHtmlPlugin([
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
-      ]),
+      // new AddAssetHtmlPlugin([
+      //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
+      //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+      // ]),
 
       /**
        * Plugin: NamedModulesPlugin (experimental)
